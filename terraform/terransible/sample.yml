@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+    - name: dummy task
+      command: touch WEZVATECH-ADAM

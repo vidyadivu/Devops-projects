@@ -1,0 +1,13 @@
+# apt update; apt install python3-pip; pip3 install boto
+# ansible-playbook awsservices.yml --tags ec2
+#  ansible-playbook awsservices.yml --tags s3 --extra-vars "s3state=present"
+#  ------------------------------------- #
+# Make sure /usr/bin/python refers to python3
+# Make sure boto is installed - /usr/bin/python -m pip install boto
+--- # Creating EC2 Instances in AWS
+- hosts: localhost     # change this to the group where your master is preset #
+  become: yes
+  connection: local
+  gather_facts: no
+  roles:
+    - aws

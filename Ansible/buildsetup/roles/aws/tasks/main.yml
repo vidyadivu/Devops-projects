@@ -1,0 +1,28 @@
+  - name: Install python-pip library  # prerequisite for ubuntu machines #
+    apt: name='{{item}}'
+    with_items:
+     - python3-pip
+     - python-dev
+    tags:
+      - s3
+  - name: Install python-boto library
+    pip: name=boto3
+    tags:
+      - s3
+  - name: Create AWS Instances
+    ec2:                         # Change the key, image, region as per your account #
+     key_name: "master"
+     instance_type: "t2.micro"
+     image: "ami-0eeb03e72075b9bcc"
+     wait: true
+     region: "ap-south-1"
+    tags:
+      - ec2
+  - name: Create S3 bucket
+    s3_bucket:
+       name: mywezvas3bucket
+       region: "ap-south-1"
+       state: "{{s3state}}"
+    tags:
+       - s3
+
